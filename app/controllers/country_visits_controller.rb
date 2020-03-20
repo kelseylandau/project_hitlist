@@ -25,9 +25,9 @@ class CountryVisitsController < ApplicationController
 
     if @country_visit.valid?
       @country_visit.save
-      redirect_to("/", { :notice => "Country visit created successfully." })
+      redirect_to("/country_visits/", { :notice => "Country visit created successfully." })
     else
-      redirect_to("/", { :notice => "Country visit failed to create successfully." })
+      redirect_to("/country_visits/", { :notice => "Country visit failed to create successfully." })
     end
   end
 

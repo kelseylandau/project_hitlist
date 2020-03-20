@@ -1,3 +1,9 @@
+
+<% if @user_follow_requests.where({:status => "pending"}).count > 1%>
+  <div class="alert alert-success">You have pending follow requests!</div>
+<%else%>
+<%end %>
+
 <div>
   <table class="homepage_profile_section">
     <tr>

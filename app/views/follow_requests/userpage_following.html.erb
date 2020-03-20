@@ -89,8 +89,8 @@
       <% @userpage_afollowing.each do |following| %>
       <tr>
         <td>
-          <a href="/users/<%= User.all.where({:id => following.sender_id}).at(0).username %>">
-            <%= User.all.where({:id => following.sender_id}).at(0).username %>
+          <a href="/users/<%= User.all.where({:id => following.recipient_id}).at(0).username %>">
+            <%= User.all.where({:id => following.recipient_id}).at(0).username %>
           </a>
         </td>
 

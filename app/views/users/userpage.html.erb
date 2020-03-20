@@ -8,7 +8,7 @@
     <% if @userpage.followers.pluck(:sender_id).include?(@current_user.id) == true %>
       <%# UNFOLLOW BUTTON %>
        
-          <form action="/delete_follow_request/<%= FollowRequest.all.where({ :recipient_id => @userpage.id }).where({ :sender_id => @current_user.id }).at(0).id%>" method="post">
+          <form action="/delete_follow_request/<%= FollowRequest.all.where({ :recipient_id => @userpage.id }).where({ :sender_id => @current_user.id }).at(0).id %>" method="post">
           
           <button class="btn btn-block btn-outline-secondary">
               Unfollow

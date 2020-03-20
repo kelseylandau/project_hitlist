@@ -75,10 +75,13 @@
         </td>
 
         <td>
-          <a href="/delete_follow_request/<%= follow_request.id %>">
-            Unfollow
-          </a>
+          <form action="/delete_follow_request/<%= follow_request.id %>" method="post">
+          <button class="btn btn-block btn-outline-secondary" >
+              Unfollow
+          </button>
+          </form>
         </td>
+
       </tr>
       <% end %>
     </table>

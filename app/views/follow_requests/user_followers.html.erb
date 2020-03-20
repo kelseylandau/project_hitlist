@@ -7,6 +7,11 @@
 </div>
 
 
+<% if @user_follow_requests.where({:status => "pending"}).count > 1%>
+  <div class="alert alert-success">You have pending follow requests!</div>
+<%else%>
+<%end %>
+
 <%# FOLLOWER BANNER %>
 <div>
   <table class="homepage_profile_section">
@@ -56,11 +61,11 @@
               </th>
 
               <th>
-                
+                Accept Request
               </th>
 
               <th>
-                
+                Delete Request
               </th>
             </tr>
 

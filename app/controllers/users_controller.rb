@@ -61,6 +61,9 @@ class UsersController < ApplicationController
     @user_hits = CountryHitList.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
     @user_countries_hit = @user_hits.pluck(:country) 
     
+    # User Follow requests
+    @user_follow_requests = FollowRequest.all.where({ :recipient_id => @current_user.id }).order({ :created_at => :desc })
+
     render({ :template => "users/homepage.html.erb" })
   end
 
