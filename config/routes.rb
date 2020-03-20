@@ -77,6 +77,7 @@ Rails.application.routes.draw do
 
   get("/discover_hit_list", { :controller => "country_hit_lists", :action => "discover" })
   get("/discover_visit", { :controller => "country_hit_lists", :action => "discover_2" })
+  get("/discover_hit_list_friend_visit", { :controller => "country_hit_lists", :action => "discover_3" })
   #------------------------------------------------------------------------------------------
 
   # Routes for the Follow request resource:

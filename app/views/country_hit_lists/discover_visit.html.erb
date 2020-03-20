@@ -13,10 +13,6 @@
       <tr>
 
         <th>
-          TEST
-        </th>
-
-        <th>
           User
         </th>
 
@@ -34,7 +30,7 @@
         </th>
       </tr>
 
-      <% @current_user.feed_visits.order({ :created_at => :desc }).each do |country_visit| %>
+      <% @current_user.feed_visits.order({ :country => :asc }).each do |country_visit| %>
 
       <% if @user_countries_visit.include?(country_visit.country) == true %>
         <%else%>

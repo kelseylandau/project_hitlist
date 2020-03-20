@@ -1,11 +1,11 @@
-<%# DISCOVER SHOWS HIT LISTS BY WHO USER IS FOLLOWING %>
+<%# DISCOVER SHOWS COUNTRIES VISITED BY WHO USER IS FOLLOWING THAT USER HAS NOT VISITED %>
 <div>
 <h2> Discover Countries to Travel to</h2>
 </div>
 <br>
 
 <div>
-<h4> Countries on your Friends Hit Lists that you haven't visited (yet)</h4>
+<h4>Hit List Countries your Friends have Visited</h4>
 </div>
 <div class="row mb-3">
   <div class="col-md-12">
@@ -24,15 +24,15 @@
           Created at
         </th>
 
+
         <th>
           
         </th>
       </tr>
-
-      <% @current_user.discover_hit_list.order({ :country => :asc }).each do |country_visit| %>
-      <% if @user_countries_visit.include?(country_visit.country) == true %>
-        <%else%>
       
+      <% @current_user.feed_visits.order({ :country => :asc }).each do |country_visit| %>
+      <%# ON FRIENDS VISITED %>
+      <% if @user_countries_hit.include?(country_visit.country) == true %>
           <tr>
 
             <td>
@@ -53,7 +53,8 @@
               </a>
             </td>
           </tr>
-        <%end %>
+        <%else%>
+        <% end %>
       <% end %>
     </table>
   </div>

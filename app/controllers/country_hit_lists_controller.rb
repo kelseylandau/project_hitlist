@@ -73,6 +73,18 @@ class CountryHitListsController < ApplicationController
     @user_visits = CountryVisit.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
     @user_countries_visit = @user_visits.pluck(:country)
 
-    render({ :template => "country_hit_lists/discover_2.html.erb" })
+    render({ :template => "country_hit_lists/discover_visit.html.erb" })
+  end
+
+  def discover_3
+    # ---------- FEED SHOWS THE COUNTRIES VISITED BY LEADERS (WHO THE USER IS FOLLOWING & ON USER HIT LIST)
+    @user_visits = CountryVisit.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
+    @user_countries_visit = @user_visits.pluck(:country)
+
+    # User HIT LIST: Array and Country List
+    @user_hits = CountryHitList.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
+    @user_countries_hit = @user_hits.pluck(:country) 
+
+    render({ :template => "country_hit_lists/discover_hit_list_friend.html.erb" })
   end
 end
