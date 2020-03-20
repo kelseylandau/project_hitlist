@@ -22,7 +22,8 @@
         </th>
       </tr>
       
-      <% @current_user.leaders.each do |user| %>
+      <% User.all.each do |user| %>
+        <% if @current_user == user %>
           <tr>
             <td>
               <%= user.username %>
@@ -36,7 +37,22 @@
               <%= CountryVisit.all.where({ :user_id => user.id }).order({ :country => :asc }).pluck(:country).join(', ') %>
             </td>
           </tr>
-      <% end %>
+          <% elsif @current_user.leaders.include?(user) == true%>
+          <tr>
+            <td>
+              <%= user.username %>
+            </td>
+
+            <td>
+              <%= CountryVisit.all.where({ :user_id => user.id }).count %>
+            </td>
+
+            <td>
+              <%= CountryVisit.all.where({ :user_id => user.id }).order({ :country => :asc }).pluck(:country).join(', ') %>
+            </td>
+          </tr>
+          <% end %>
+        <% end %>
     </table>
   </div>
 </div>
