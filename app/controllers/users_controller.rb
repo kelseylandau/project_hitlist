@@ -61,9 +61,22 @@ class UsersController < ApplicationController
     @user_hits = CountryHitList.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
     @user_countries_hit = @user_hits.pluck(:country) 
     
-    
-
     render({ :template => "users/homepage.html.erb" })
+  end
+
+  def userpage
+    the_username = params.fetch("username").to_s
+    @userpage = User.where({ :username => the_username }).at(0) 
+    
+    # Userpage VISITED: Array and Country List
+    @userpage_visits = CountryVisit.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
+    @userpage_countries_visit = @userpage_visits.pluck(:country)
+
+    # Userpage HIT LIST: Array and Country List
+    @userpage_hits = CountryHitList.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
+    @userpage_countries_hit = @userpage_hits.pluck(:country) 
+    
+    render({ :template => "users/userpage.html.erb" })
   end
   
 
