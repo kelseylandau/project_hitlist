@@ -1,6 +1,50 @@
 Rails.application.routes.draw do
 
+  #------------------------------
 
+  # Routes for the User account:
+
+  # SIGN UP FORM
+  get("/user_sign_up", { :controller => "users", :action => "new_registration_form" })        
+  # CREATE RECORD
+  post("/insert_user", { :controller => "users", :action => "create"  })
+      
+  # EDIT PROFILE FORM        
+  get("/edit_user_profile", { :controller => "users", :action => "edit_registration_form" })       
+  # UPDATE RECORD
+  post("/modify_user", { :controller => "users", :action => "update" })
+  
+  # DELETE RECORD
+  get("/cancel_user_account", { :controller => "users", :action => "destroy" })
+
+  # ------------------------------
+
+  # SIGN IN FORM
+  get("/user_sign_in", { :controller => "user_sessions", :action => "new_session_form" })
+  # AUTHENTICATE AND STORE COOKIE
+  post("/user_verify_credentials", { :controller => "user_sessions", :action => "create_cookie" })
+  
+  # SIGN OUT        
+  get("/user_sign_out", { :controller => "user_sessions", :action => "destroy_cookies" })
+
+  #------------------------------
+
+  # Routes for the Country visit resource:
+
+  # CREATE
+  post("/insert_country_visit", { :controller => "country_visits", :action => "create" })
+          
+  # READ
+  get("/country_visits", { :controller => "country_visits", :action => "index" })
+  
+  get("/country_visits/:path_id", { :controller => "country_visits", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_country_visit/:path_id", { :controller => "country_visits", :action => "update" })
+  
+  # DELETE
+  get("/delete_country_visit/:path_id", { :controller => "country_visits", :action => "destroy" })
 
   # Routes for the Country hit list resource:
 
@@ -37,52 +81,6 @@ Rails.application.routes.draw do
   
   # DELETE
   get("/delete_follow_request/:path_id", { :controller => "follow_requests", :action => "destroy" })
-
-  #------------------------------
-
-  # Routes for the Country visit resource:
-
-  # CREATE
-  post("/insert_country_visit", { :controller => "country_visits", :action => "create" })
-          
-  # READ
-  get("/country_visits", { :controller => "country_visits", :action => "index" })
-  
-  get("/country_visits/:path_id", { :controller => "country_visits", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_country_visit/:path_id", { :controller => "country_visits", :action => "update" })
-  
-  # DELETE
-  get("/delete_country_visit/:path_id", { :controller => "country_visits", :action => "destroy" })
-
-  #------------------------------
-
-  # Routes for the User account:
-
-  # SIGN UP FORM
-  get("/user_sign_up", { :controller => "users", :action => "new_registration_form" })        
-  # CREATE RECORD
-  post("/insert_user", { :controller => "users", :action => "create"  })
-      
-  # EDIT PROFILE FORM        
-  get("/edit_user_profile", { :controller => "users", :action => "edit_registration_form" })       
-  # UPDATE RECORD
-  post("/modify_user", { :controller => "users", :action => "update" })
-  
-  # DELETE RECORD
-  get("/cancel_user_account", { :controller => "users", :action => "destroy" })
-
-  # ------------------------------
-
-  # SIGN IN FORM
-  get("/user_sign_in", { :controller => "user_sessions", :action => "new_session_form" })
-  # AUTHENTICATE AND STORE COOKIE
-  post("/user_verify_credentials", { :controller => "user_sessions", :action => "create_cookie" })
-  
-  # SIGN OUT        
-  get("/user_sign_out", { :controller => "user_sessions", :action => "destroy_cookies" })
              
   #------------------------------
 
