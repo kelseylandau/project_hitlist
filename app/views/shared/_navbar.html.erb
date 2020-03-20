@@ -15,10 +15,10 @@
             Travel Lists
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a href="/country_visits/<%#{@current_user.user_id}%>" class="dropdown-item">
+            <a href="/country_visits/" class="dropdown-item">
               Visited Countries
             </a>
-            <a href="/country_hit_lists/<%#{@current_user.user_id}%>" class="dropdown-item">
+            <a href="/country_hit_lists/" class="dropdown-item">
               Hit List
             </a>
           </div>
@@ -41,13 +41,13 @@
           </li>
         <% else %>
           <li class="nav-item">
-            <a href="/edit_user" class="nav-link">
+            <a href="/edit_user_profile" class="nav-link">
               Edit profile
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/user_sign_out" data-method="delete" class="nav-link">
+            <a href="/user_sign_out" class="nav-link">
               Sign out
             </a>
           </li>

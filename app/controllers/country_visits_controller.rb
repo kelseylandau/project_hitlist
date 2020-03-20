@@ -1,6 +1,8 @@
 class CountryVisitsController < ApplicationController
   def index
-    @country_visits = CountryVisit.all.order({ :created_at => :desc })
+    @country_visits = CountryVisit.all.order({ :country => :asc })
+    @user_visits = CountryVisit.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
+    
 
     render({ :template => "country_visits/index.html.erb" })
   end
@@ -15,7 +17,7 @@ class CountryVisitsController < ApplicationController
   def create
     @country_visit = CountryVisit.new
     @country_visit.country = params.fetch("query_country")
-    @country_visit.user_id = params.fetch("query_user_id")
+    @country_visit.user_id = @current_user.id
 
     if @country_visit.valid?
       @country_visit.save

@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      List of all country visits
+      <%= @current_user.username %>'s Visited Countries
     </h1>
   </div>
 </div>
@@ -21,14 +21,6 @@
         </label>
 
         <input type="text" id="country_box" name="query_country" class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id" class="form-control">
       </div>
 
       <button class="btn btn-block btn-outline-secondary">
@@ -52,22 +44,14 @@
         </th>
 
         <th>
-          User
-        </th>
-
-        <th>
           Created at
-        </th>
-
-        <th>
-          Updated at
         </th>
 
         <th>
         </th>
       </tr>
 
-      <% @country_visits.each do |country_visit| %>
+      <% @user_visits.each do |country_visit| %>
       <tr>
         <td>
           <%= country_visit.id %>
@@ -78,14 +62,7 @@
         </td>
 
         <td>
-          <%= country_visit.user_id %>
-        </td>
-
-        <td>
           <%= time_ago_in_words(country_visit.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(country_visit.updated_at) %> ago
         </td>
 
         <td>
