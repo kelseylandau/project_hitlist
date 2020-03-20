@@ -53,6 +53,16 @@ class UsersController < ApplicationController
   end
   
   def homepage
+    # User VISITED: Array and Country List
+    @user_visits = CountryVisit.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
+    @user_countries_visit = @user_visits.pluck(:country)
+
+    # User HIT LIST: Array and Country List
+    @user_hits = CountryHitList.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
+    @user_countries_hit = @user_hits.pluck(:country) 
+    
+    
+
     render({ :template => "users/homepage.html.erb" })
   end
   

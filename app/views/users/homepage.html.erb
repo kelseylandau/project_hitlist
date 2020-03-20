@@ -4,12 +4,30 @@
   </h2>
 </div>
 
-<div class="homepage_profile_bar">
-    <ul style="list-style-type:none">
-      <li> <%= @current_user.username %> </li>
-      <li> Countries Visited</li>
-      <li>Followers</li>
-      <li>Following</li>
-    </ul>
+<div>
+   <table class="homepage_profile_section">
+    <tr>
+      <th>
+        <%= @current_user.username %> 
+      </th>
+
+      <th>
+        <%= @user_countries_visit.count %> 
+        Countries Visited 
+      </th>
+
+      <th>
+        <%= @user_countries_hit.count %> 
+        Countries to Hit 
+      </th>
+
+      <th>
+        Followers
+      </th>
+
+      <th>
+        Following
+      </th>
+    </tr> 
 </div>
 

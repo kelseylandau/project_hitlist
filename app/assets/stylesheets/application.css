@@ -13,3 +13,10 @@
  *= require_self
  */
 
+  .homepage_profile_section {
+    margin-left:auto; 
+    margin-right:auto;
+    background-color: #F0FFFF;
+    width: 100%;
+  }
+
