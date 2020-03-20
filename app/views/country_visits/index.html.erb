@@ -36,10 +36,6 @@
     <table class="table">
       <tr>
         <th>
-          ID
-        </th>
-
-        <th>
           Country
         </th>
 
@@ -48,15 +44,16 @@
         </th>
 
         <th>
+          Edit
+        </th>
+
+        <th>
+          
         </th>
       </tr>
 
       <% @user_visits.each do |country_visit| %>
       <tr>
-        <td>
-          <%= country_visit.id %>
-        </td>
-
         <td>
           <%= country_visit.country %>
         </td>
@@ -68,6 +65,12 @@
         <td>
           <a href="/country_visits/<%= country_visit.id %>">
             Show details
+          </a>
+        </td>
+
+        <td>
+          <a href="/delete_country_visit/<%= country_visit.id %>">
+            Delete
           </a>
         </td>
       </tr>

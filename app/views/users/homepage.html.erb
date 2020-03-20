@@ -1,9 +1,3 @@
-<div >
-  <h2>
-    Homepage
-  </h2>
-</div>
-
 <div>
    <table class="homepage_profile_section">
     <tr>
@@ -22,12 +16,65 @@
       </th>
 
       <th>
+        <%= @current_user.followers.count %>
         Followers
       </th>
 
       <th>
+        <%= @current_user.leaders.count %> 
         Following
       </th>
     </tr> 
+</div>
+
+<hr>
+<div><h3> <%= @current_user.username %>'s Visited Countries
+</h3></div>
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          Country
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Edit
+        </th>
+
+        <th>
+          
+        </th>
+      </tr>
+
+      <% @user_visits.each do |country_visit| %>
+      <tr>
+        <td>
+          <%= country_visit.country %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(country_visit.created_at) %> ago
+        </td>
+
+        <td>
+          <a href="/country_visits/<%= country_visit.id %>">
+            Show details
+          </a>
+        </td>
+
+        <td>
+          <a href="/delete_country_visit/<%= country_visit.id %>">
+            Delete
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
 
