@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get("/", { :controller => "users", :action => "homepage"})
 
   get("/users/:username", { :controller => "users", :action => "userpage"})
+  
 
   # SIGN UP FORM
   get("/user_sign_up", { :controller => "users", :action => "new_registration_form" })        
@@ -80,7 +81,7 @@ Rails.application.routes.draw do
   
   # UPDATE
   
-  post("/modify_follow_request/:path_id", { :controller => "follow_requests", :action => "update" })
+  get("/accept_follow_request/:path_id", { :controller => "follow_requests", :action => "accept_follow" })
   
   # DELETE
   get("/delete_follow_request/:path_id", { :controller => "follow_requests", :action => "destroy" })

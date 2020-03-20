@@ -3,12 +3,37 @@
 </div>
 <hr>
 
-<% if @follower_yes == true %>
-  UNFOLLOW BUTTON
-<% else %>
-  FOLLOW BUTTON
-<% end %> 
+<table>
+  <tr>
+    <% if @userpage.followers.pluck(:sender_id).include?(@current_user.id) == true %>
+      <%# UNFOLLOW BUTTON %>
+       
+          <form action="/delete_follow_request/<%= FollowRequest.all.where({ :recipient_id => @userpage.id }).where({ :sender_id => @current_user.id }).at(0).id%>" method="post">
+          
+          <button class="btn btn-block btn-outline-secondary">
+              Unfollow
+          </button>
 
+          </form>
+  
+      <% else %>
+        <%# FOLLOW BUTTON %>
+                 
+            <form action="/insert_follow_request" method="post">
+
+              <div class="form-group">
+                    <input type="hidden" id="recipient_id_box" name="query_recipient_id" class="form-control" value="<%= @userpage.id %>">
+              </div>
+                <button class="btn btn-block btn-outline-secondary">
+                    Follow
+                </button>
+            </form>
+
+    <% end %> 
+  </tr>
+</table>
+
+<hr>
 
 <div>
   <table class="userpage_profile_section">
@@ -43,7 +68,6 @@
 
 
 
-<hr>
 <div>
   <h4> <%= @userpage.username %>'s Visited Countries
   </h4>

@@ -66,7 +66,7 @@ class UsersController < ApplicationController
 
   def userpage
     the_username = params.fetch("username").to_s
-    @userpage = User.where({ :username => the_username }).at(0) 
+    @userpage = User.all.where({ :username => the_username }).at(0) 
     
     # Userpage VISITED: Array and Country List
     @userpage_visits = CountryVisit.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
@@ -75,10 +75,14 @@ class UsersController < ApplicationController
     # Userpage HIT LIST: Array and Country List
     @userpage_hits = CountryHitList.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
     @userpage_countries_hit = @userpage_hits.pluck(:country) 
-    
 
+    # USERPAGE FOLLOWERS
+    
+    # USERPAGE FOLLOWING
+
+   
       if @userpage.private == true
-        if @userpage.followers.pluck(:username).include?@current_user.username == true
+        if @follower_yes == true
           render({ :template => "users/userpage.html.erb" })
         else
           render({ :template => "users/userpage_private.html.erb" })
@@ -87,11 +91,7 @@ class UsersController < ApplicationController
         render({ :template => "users/userpage.html.erb" })
       end
 
-      if @userpage.followers.pluck(:username).include?@current_user.username == true
-        @follower_yes == true
-      else
-        @follower_yes == false
-      end
+      
 
   end
   

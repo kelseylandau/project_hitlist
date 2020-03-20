@@ -11,8 +11,13 @@
       </div>
       <div>
         <label for="private_box">Private</label>
-        <input id="private_box" name="query_private" type="checkbox" value="1">
+        <input id="private_box" name="query_private" type="checkbox" value="true">
       </div>
+      <% if @current_user.private == true%>
+        <p>Your Profile is Private</p>
+      <% else %>
+        <p>Your Profile is Public</p>
+      <% end %>
       <div>
         <label for="username_box">Username</label>
         <input id="username_box" name="query_username" value="<%= @current_user.username %>">
