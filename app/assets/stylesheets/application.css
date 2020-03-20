@@ -20,6 +20,12 @@
     width: 100%;
     table-layout: fixed ;
     text-align: center;
-    top: 0;
-    
+    vertical-align: center;
+      
+  }
+
+.homepage_profile_section th {
+  height: 50px;
+  vertical-align: center;
+      
   }

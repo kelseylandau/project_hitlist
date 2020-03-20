@@ -21,9 +21,9 @@ class CountryVisitsController < ApplicationController
 
     if @country_visit.valid?
       @country_visit.save
-      redirect_to("/country_visits", { :notice => "Country visit created successfully." })
+      redirect_to("/", { :notice => "Country visit created successfully." })
     else
-      redirect_to("/country_visits", { :notice => "Country visit failed to create successfully." })
+      redirect_to("/", { :notice => "Country visit failed to create successfully." })
     end
   end
 
@@ -48,6 +48,6 @@ class CountryVisitsController < ApplicationController
 
     @country_visit.destroy
 
-    redirect_to("/country_visits", { :notice => "Country visit deleted successfully."} )
+    redirect_to("/", { :notice => "Country visit deleted successfully."} )
   end
 end

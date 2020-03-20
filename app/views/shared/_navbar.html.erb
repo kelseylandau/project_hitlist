@@ -60,6 +60,7 @@
             </a>
           </li>
         <% else %>
+          <p class="navbar-text">Signed in as <%= @current_user.username %></p>
           <li class="nav-item">
             <a href="/edit_user_profile" class="nav-link">
               Edit profile
