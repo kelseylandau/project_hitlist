@@ -21,11 +21,18 @@
     table-layout: fixed ;
     text-align: center;
     vertical-align: center;
-      
+    color: #0d47a1; 
+	  border: 1px solid #2E2E2E;
   }
+
 
 .homepage_profile_section th, .userpage_profile_section th {
   height: 50px;
   vertical-align: center;
       
   }
+
+.homepage_profile_section a:link, .homepage_profile_section a {
+  color: #0d47a1;
+  text-decoration: none;
+}

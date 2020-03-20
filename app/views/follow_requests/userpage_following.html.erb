@@ -67,43 +67,35 @@
 <hr>
 
 
-<%# -------------------------- COUNTRIES VISITED -------------------------- %>
-<div>
-  <h4> <%= @userpage.username %>'s Visited Countries
-  </h4>
-</div>
 
+<%# CURRENT FOLLOWing %>
+<hr>
+<h4>Following</h4>
 <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
       <tr>
+
         <th>
-          Country
+          User
         </th>
 
         <th>
-          Created at
-        </th>
-
-        <th>
+          Since
         </th>
 
       </tr>
 
-      <% @userpage_visits.each do |country_visit| %>
+      <% @userpage_afollowing.each do |following| %>
       <tr>
         <td>
-          <%= country_visit.country %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(country_visit.created_at) %> ago
-        </td>
-
-        <td>
-          <a href="/country_visits/<%= country_visit.id %>">
-            Show details
+          <a href="/users/<%= User.all.where({:id => following.sender_id}).at(0).username %>">
+            <%= User.all.where({:id => following.sender_id}).at(0).username %>
           </a>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(following.created_at) %> ago
         </td>
 
       </tr>
@@ -112,49 +104,4 @@
   </div>
 </div>
 
-<%# -------------------------- COUNTRY HIT LIST -------------------------- %>
-<div>
-  <h4> <%= @userpage.username %>'s Hit List
-  </h4>
-</div>
-
-<div class="row mb-3">
-  <div class="col-md-12">
-    <table class="table">
-      <tr>
-        <th>
-          Country
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-        </th>
-
-      </tr>
-
-      <% @userpage_hits.each do |country_hit| %>
-      <tr>
-        <td>
-          <%= country_hit.country %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(country_hit.created_at) %> ago
-        </td>
-
-        <td>
-          <a href="/country_visits/<%= country_hit.id %>">
-            Show details
-          </a>
-        </td>
-
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-
+<hr>

@@ -1,9 +1,38 @@
 <div class="row mb-3">
   <div class="col-md-12">
-    <h1>
-      <%= @current_user.username %>'s Visited Countries
-    </h1>
+    <h2>
+      Visited Countries
+    </h2>
   </div>
+</div>
+<div>
+  <table class="homepage_profile_section">
+    <tr>
+      <th>
+        <a href="/"><%= @current_user.username %> </a>
+      </th>
+
+      <th>
+        <a href="/country_visits/"> <%= @user_countries_visit.count %> 
+        Countries Visited </a>
+      </th>
+
+      <th>
+        <a href="/country_hit_lists/"><%= @user_countries_hit.count %> 
+        Countries to Hit </a>
+      </th>
+
+      <th>
+        <a href="/followers"><%= @current_user.followers.count %>
+        Followers</a>
+      </th>
+
+      <th>
+        <a href="/following"><%= @current_user.leaders.count %> 
+        Following</a>
+      </th>
+    </tr> 
+  </table>
 </div>
 
 <hr>

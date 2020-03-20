@@ -1,31 +1,42 @@
 <div class="row mb-3">
   <div class="col-md-12">
-    <h1>
-      <%= @current_user.username %>
-    </h1>
+    <h2>
+      Followers
+    </h2>
   </div>
 </div>
 
-<hr>
 
 <%# FOLLOWER BANNER %>
 <div>
   <table class="homepage_profile_section">
     <tr>
-
       <th>
-        <%= @current_user.followers.count %>
-        Followers
+        <a href="/"><%= @current_user.username %> </a>
       </th>
 
       <th>
-        <%= @current_user.leaders.count %> 
-        Following
+        <a href="/country_visits/"> <%= @user_countries_visit.count %> 
+        Countries Visited </a>
+      </th>
+
+      <th>
+        <a href="/country_hit_lists/"><%= @user_countries_hit.count %> 
+        Countries to Hit </a>
+      </th>
+
+      <th>
+        <a href="/followers"><%= @current_user.followers.count %>
+        Followers</a>
+      </th>
+
+      <th>
+        <a href="/following"><%= @current_user.leaders.count %> 
+        Following</a>
       </th>
     </tr> 
   </table>
 </div>
-
 <%# IF STATEMENT TO SEE IF PENDING REQUESTS %>
 <% if @user_follow_requests.where({:status => "pending"}).count > 1%>
     <%# PENDING FOLLOWERS %>
@@ -92,7 +103,7 @@
 
 <%# CURRENT FOLLOWERS %>
 <hr>
-<h3><%= @current_user.username %>'s Followers</h3>
+<h3>Current Followers</h3>
 <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
@@ -104,10 +115,6 @@
 
         <th>
           Created at
-        </th>
-
-        <th>
-          Status
         </th>
 
         <th>
@@ -128,12 +135,11 @@
         </td>
 
         <td>
-          <%= follow_request.status %>
-        </td>
-
-        <td>
           <a href="/delete_follow_request/<%= follow_request.id %>">
-            Delete
+                  <svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z"/>
+                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" clip-rule="evenodd"/>
+                  </svg>
           </a>
         </td>
       </tr>

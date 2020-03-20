@@ -1,22 +1,15 @@
-<div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
+<div >
+  <div >
     <h1>
-      Country visit #<%= @country_visit.id %> details
+      <%= User.where({ :id => @country_visit.user_id}).at(0).username %>'s visit to <%= @country_visit.country %>
     </h1>
 
-    <div class="row mb-3">
-      <div class="col">
-        <a href="/country_visits" class="btn btn-block btn-outline-secondary">
+    <div>
+      <div >
+        <a href="/users/<%= User.where({ :id => @country_visit.user_id}).at(0).username %>" class="btn btn-block btn-outline-secondary">
           Go back
         </a>
       </div>
-
-      <div class="col">
-        <a href="/delete_country_visit/<%= @country_visit.id %>" class="btn btn-block btn-outline-secondary">
-          Delete country visit
-        </a>
-      </div>
-    </div>
 
     <dl>
       <dt>
@@ -30,7 +23,7 @@
         User
       </dt>
       <dd>
-        <%= @country_visit.user_id %>
+        <%= User.where({ :id => @country_visit.user_id}).at(0).username %>
       </dd>
 
       <dt>
@@ -52,35 +45,48 @@
 
 <hr>
 
+<% if @current_user.username == User.where({ :id => @country_visit.user_id}).at(0).username %>
+    <%# SHOW THE EDIT SECTION %>
+  <div >
+    <div >
+      <h2>
+        Edit country visit
+      </h2>
 
-<div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
-    <h2>
-      Edit country visit
-    </h2>
+      <form action="/modify_country_visit/<%= @country_visit.id %>"  method="post" >
+        <div class="form-group">
+          <label for="country_box">
+            Country
+          </label>
 
-    <form action="/modify_country_visit/<%= @country_visit.id %>"  method="post" >
-      <div class="form-group">
-        <label for="country_box">
-          Country
-        </label>
+          <input type="text" id="country_box" name="query_country" class="form-control" value="<%= @country_visit.country %>">
+        </div>
 
-        <input type="text" id="country_box" name="query_country" class="form-control" value="<%= @country_visit.country %>">
-      </div>
+        <div class="form-group">
+          <label for="user_id_box">
+            User
+          </label>
 
-      <div class="form-group">
-        <label for="user_id_box">
-          User
-        </label>
+          <input type="hidden" id="user_id_box" name="query_user_id" class="form-control" value="<%= @country_visit.user_id %>">
+        </div>
 
-        <input type="text" id="user_id_box" name="query_user_id" class="form-control" value="<%= @country_visit.user_id %>">
-      </div>
+        <div class="row mb-3">
+            <div class="col">
+            <button class="btn btn-block btn-outline-secondary">
+              Update country visit
+            </button>
+          </div>
 
-      <button class="btn btn-block btn-outline-secondary">
-        Update country visit
-      </button>
-    </form>
+          <div class="col">
+            <a href="/delete_country_visit/<%= @country_visit.id %>" class="btn btn-block btn-outline-secondary">
+              Delete country visit
+            </a>
+          </div>
+        </div>
+
+      </form>
+    </div>
   </div>
-</div>
+<%else%>
+<%end%>
 
-<hr>

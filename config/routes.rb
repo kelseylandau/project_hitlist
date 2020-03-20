@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   get("/", { :controller => "users", :action => "homepage"})
 
   get("/users/:username", { :controller => "users", :action => "userpage"})
-  
+  get("/users/:username/followers", { :controller => "users", :action => "userpage_followers"})
+  get("/users/:username/following", { :controller => "users", :action => "userpage_following"})
+  get("/users/:username/visits", { :controller => "users", :action => "userpage_visits"})
+  get("/users/:username/hit_list", {:controller => "users", :action => "userpage_hit_list"})
 
   # SIGN UP FORM
   get("/user_sign_up", { :controller => "users", :action => "new_registration_form" })        
@@ -75,7 +78,8 @@ Rails.application.routes.draw do
   post("/insert_follow_request", { :controller => "follow_requests", :action => "create" })
           
   # READ
-  get("/followers", { :controller => "follow_requests", :action => "index" })
+  get("/followers", { :controller => "follow_requests", :action => "followers_index" })
+  get("/following", { :controller => "follow_requests", :action => "following_index" })
   
   get("/follow_requests/:path_id", { :controller => "follow_requests", :action => "show" })
   

@@ -1,0 +1,88 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h2>
+      Following
+    </h2>
+  </div>
+</div>
+
+
+
+<%# FOLLOWER BANNER %>
+<div>
+  <table class="homepage_profile_section">
+    <tr>
+      <th>
+        <a href="/"><%= @current_user.username %> </a>
+      </th>
+
+      <th>
+        <a href="/country_visits/"> <%= @user_countries_visit.count %> 
+        Countries Visited </a>
+      </th>
+
+      <th>
+        <a href="/country_hit_lists/"><%= @user_countries_hit.count %> 
+        Countries to Hit </a>
+      </th>
+
+      <th>
+        <a href="/followers"><%= @current_user.followers.count %>
+        Followers</a>
+      </th>
+
+      <th>
+        <a href="/following"><%= @current_user.leaders.count %> 
+        Following</a>
+      </th>
+    </tr> 
+  </table>
+</div>
+
+
+<%# CURRENT FOLLOWING %>
+<hr>
+<h3>Currently Following</h3>
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          
+        </th>
+
+      </tr>
+
+      <% @user_afollowing.each do |follow_request| %>
+      <tr>
+        <td>
+          <a href="/users/<%= User.all.where({:id => follow_request.recipient_id}).at(0).username %>">
+            <%= User.all.where({:id => follow_request.recipient_id}).at(0).username %>
+          </a>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(follow_request.created_at) %> ago
+        </td>
+
+        <td>
+          <a href="/delete_follow_request/<%= follow_request.id %>">
+            Unfollow
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

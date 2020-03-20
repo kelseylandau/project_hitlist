@@ -2,7 +2,11 @@ class CountryHitListsController < ApplicationController
   def index
     @country_hit_lists = CountryHitList.all.order({ :created_at => :desc })
     @user_hits = CountryHitList.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
-    @user_countries_hits = @user_hits.pluck(:country)
+    @user_countries_hit = @user_hits.pluck(:country)
+
+    # User VISITED: Array and Country List
+    @user_visits = CountryVisit.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
+    @user_countries_visit = @user_visits.pluck(:country)
 
     render({ :template => "country_hit_lists/index.html.erb" })
   end

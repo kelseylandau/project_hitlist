@@ -1,9 +1,31 @@
 class FollowRequestsController < ApplicationController
-  def index
+  def followers_index
     @follow_requests = FollowRequest.all.order({ :created_at => :desc })
     @user_follow_requests = FollowRequest.all.where({ :recipient_id => @current_user.id }).order({ :created_at => :desc })
+
+    # User VISITED: Array and Country List
+    @user_visits = CountryVisit.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
+    @user_countries_visit = @user_visits.pluck(:country)
+
+    # User HIT LIST: Array and Country List
+    @user_hits = CountryHitList.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
+    @user_countries_hit = @user_hits.pluck(:country) 
     
     render({ :template => "follow_requests/user_followers.html.erb" })
+  end
+
+  def following_index
+    @user_afollowing = FollowRequest.all.where({ :sender_id => @current_user.id }).where({ :status => "accepted"}).order({ :created_at => :desc })
+    
+    # User VISITED: Array and Country List
+    @user_visits = CountryVisit.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
+    @user_countries_visit = @user_visits.pluck(:country)
+
+    # User HIT LIST: Array and Country List
+    @user_hits = CountryHitList.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
+    @user_countries_hit = @user_hits.pluck(:country) 
+
+    render({ :template => "follow_requests/user_following.html.erb" })
   end
 
   def show

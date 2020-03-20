@@ -76,13 +76,11 @@ class UsersController < ApplicationController
     @userpage_hits = CountryHitList.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
     @userpage_countries_hit = @userpage_hits.pluck(:country) 
 
-    # USERPAGE FOLLOWERS
-    
-    # USERPAGE FOLLOWING
-
-   
+    if @current_user.id == @userpage.id
+      redirect_to("/")
+    else
       if @userpage.private == true
-        if @follower_yes == true
+        if @userpage.followers.pluck(:sender_id).include?(@current_user.id) == true
           render({ :template => "users/userpage.html.erb" })
         else
           render({ :template => "users/userpage_private.html.erb" })
@@ -90,10 +88,114 @@ class UsersController < ApplicationController
       else
         render({ :template => "users/userpage.html.erb" })
       end
-
-      
+    end  
 
   end
-  
+
+  def userpage_followers
+    the_username = params.fetch("username").to_s
+    @userpage = User.all.where({ :username => the_username }).at(0) 
+    
+    # Userpage VISITED: Array and Country List
+    @userpage_visits = CountryVisit.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
+    @userpage_countries_visit = @userpage_visits.pluck(:country)
+
+    # Userpage HIT LIST: Array and Country List
+    @userpage_hits = CountryHitList.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
+    @userpage_countries_hit = @userpage_hits.pluck(:country) 
+    
+    # Userpage FOLLOWERS
+    @userpage_afollow_requests = FollowRequest.all.where({ :recipient_id => @userpage.id }).where({:status => "accepted"}).order({ :created_at => :desc })
+
+      if @userpage.private == true
+        if @userpage.followers.pluck(:sender_id).include?(@current_user.id) == true
+          render({ :template => "follow_requests/userpage_followers.html.erb" })
+        else
+          render({ :template => "users/userpage_private.html.erb" })
+        end
+      else
+        render({ :template => "follow_requests/userpage_followers.html.erb" })
+      end
+  end
+
+  def userpage_following
+    the_username = params.fetch("username").to_s
+    @userpage = User.all.where({ :username => the_username }).at(0) 
+    
+    # Userpage VISITED: Array and Country List
+    @userpage_visits = CountryVisit.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
+    @userpage_countries_visit = @userpage_visits.pluck(:country)
+
+    # Userpage HIT LIST: Array and Country List
+    @userpage_hits = CountryHitList.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
+    @userpage_countries_hit = @userpage_hits.pluck(:country) 
+
+    # Userpage FOLLOWERS
+    @userpage_afollowing = FollowRequest.all.where({ :sender_id => @userpage.id }).where({:status => "accepted"}).order({ :created_at => :desc })
+
+      if @userpage.private == true
+        if @userpage.followers.pluck(:sender_id).include?(@current_user.id) == true
+          render({ :template => "follow_requests/userpage_following.html.erb" })
+        else
+          render({ :template => "users/userpage_private.html.erb" })
+        end
+      else
+        render({ :template => "follow_requests/userpage_following.html.erb" })
+      end
+  end
+
+  def userpage_visits
+    the_username = params.fetch("username").to_s
+    @userpage = User.all.where({ :username => the_username }).at(0) 
+    
+    # Userpage VISITED: Array and Country List
+    @userpage_visits = CountryVisit.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
+    @userpage_countries_visit = @userpage_visits.pluck(:country)
+
+    # Userpage HIT LIST: Array and Country List
+    @userpage_hits = CountryHitList.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
+    @userpage_countries_hit = @userpage_hits.pluck(:country) 
+
+    # Userpage VISITED: Array and Country List
+    @userpage_visits = CountryVisit.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
+    @userpage_countries_visit = @userpage_visits.pluck(:country)
+
+      if @userpage.private == true
+        if @userpage.followers.pluck(:sender_id).include?(@current_user.id) == true
+          render({ :template => "country_visits/userpage_index.html.erb" })
+        else
+          render({ :template => "users/userpage_private.html.erb" })
+        end
+      else
+        render({ :template => "country_visits/userpage_index.html.erb" })
+      end
+  end
+
+  def userpage_hit_list
+    the_username = params.fetch("username").to_s
+    @userpage = User.all.where({ :username => the_username }).at(0) 
+    
+    # Userpage VISITED: Array and Country List
+    @userpage_visits = CountryVisit.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
+    @userpage_countries_visit = @userpage_visits.pluck(:country)
+
+    # Userpage HIT LIST: Array and Country List
+    @userpage_hits = CountryHitList.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
+    @userpage_countries_hit = @userpage_hits.pluck(:country) 
+
+    # Userpage HIT LIST: Array and Country List
+    @userpage_hits = CountryHitList.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
+    @userpage_countries_hit = @userpage_hits.pluck(:country) 
+
+      if @userpage.private == true
+        if @userpage.followers.pluck(:sender_id).include?(@current_user.id) == true
+          render({ :template => "country_hit_lists/userpage_index.html.erb" })
+        else
+          render({ :template => "users/userpage_private.html.erb" })
+        end
+      else
+        render({ :template => "country_hit_lists/userpage_index.html.erb" })
+      end
+  end
 
 end
