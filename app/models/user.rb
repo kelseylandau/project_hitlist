@@ -27,7 +27,7 @@ class User < ApplicationRecord
   has_many :sent_follow_requests, :class_name => "FollowRequest", :foreign_key => "sender_id", :dependent => :destroy
     has_many(:accepted_sent_follow_requests, -> { where({ :status => "accepted" }) }, { :class_name => "FollowRequest", :foreign_key => "sender_id" })
 
-  has_many :leaders, :through => :sent_follow_requests, :source => :recipient
-  has_many :followers, :through => :received_follow_requests, :source => :sender
+  has_many :leaders, :through => :accepted_sent_follow_requests, :source => :recipient
+  has_many :followers, :through => :accepted_recieved_follow_requests, :source => :sender
     has_many :pending_followers, :through => :pending_recieved_follow_requests, :source => :sender
 end

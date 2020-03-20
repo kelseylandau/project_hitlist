@@ -76,7 +76,23 @@ class UsersController < ApplicationController
     @userpage_hits = CountryHitList.all.where({ :user_id => @userpage.id }).order({ :country => :asc })
     @userpage_countries_hit = @userpage_hits.pluck(:country) 
     
-    render({ :template => "users/userpage.html.erb" })
+
+      if @userpage.private == true
+        if @userpage.followers.pluck(:username).include?@current_user.username == true
+          render({ :template => "users/userpage.html.erb" })
+        else
+          render({ :template => "users/userpage_private.html.erb" })
+        end
+      else
+        render({ :template => "users/userpage.html.erb" })
+      end
+
+      if @userpage.followers.pluck(:username).include?@current_user.username == true
+        @follower_yes == true
+      else
+        @follower_yes == false
+      end
+
   end
   
 

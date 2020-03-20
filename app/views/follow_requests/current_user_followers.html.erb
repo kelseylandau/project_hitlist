@@ -1,0 +1,77 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      <%= @current_user.username %>
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <table class="homepage_profile_section">
+    <tr>
+
+      <th>
+        <%= @current_user.followers.count %>
+        Followers
+      </th>
+
+      <th>
+        <%= @current_user.leaders.count %> 
+        Following
+      </th>
+    </tr> 
+  </table>
+</div>
+
+<hr>
+<h3><%= @current_user.username %>'s Followers</h3>
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Status
+        </th>
+
+        <th>
+          Delete
+        </th>
+      </tr>
+
+      <% @user_follow_requests.each do |follow_request| %>
+      <tr>
+        <td>
+          <%= User.all.where({:id => follow_request.sender_id}).at(0).username %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(follow_request.created_at) %> ago
+        </td>
+
+        <td>
+          <%= follow_request.status %>
+        </td>
+
+        <td>
+          <a href="/delete_follow_request/<%= follow_request.id %>">
+            Delete
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

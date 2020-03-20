@@ -1,7 +1,9 @@
 class FollowRequestsController < ApplicationController
   def index
     @follow_requests = FollowRequest.all.order({ :created_at => :desc })
-
+    @user_follow_requests = FollowRequest.all.where({ :recipient_id => @current_user.id }).order({ :created_at => :desc })
+    
+    if @current_user == 
     render({ :template => "follow_requests/index.html.erb" })
   end
 
@@ -13,16 +15,24 @@ class FollowRequestsController < ApplicationController
   end
 
   def create
+    the_id = params.fetch("query_recipient_id")
+    @recipient = User.where({ :id => the_id }).at(0)
+    
     @follow_request = FollowRequest.new
     @follow_request.recipient_id = params.fetch("query_recipient_id")
-    @follow_request.sender_id = params.fetch("query_sender_id")
-    @follow_request.status = params.fetch("query_status")
+    @follow_request.sender_id = @current_user.id
+    
+    if @recipient.private == true
+      @follow_request.status = "pending"
+    else 
+      @follow_request.status = "accepted"
+    end
 
     if @follow_request.valid?
       @follow_request.save
-      redirect_to("/follow_requests", { :notice => "Follow request created successfully." })
+      redirect_to("/users/#{@recipient.username}", { :notice => "Follow request sent." })
     else
-      redirect_to("/follow_requests", { :notice => "Follow request failed to create successfully." })
+      redirect_to("/users/#{@recipient.username}", { :notice => "Follow request failed to send." })
     end
   end
 

@@ -1,0 +1,24 @@
+<div>
+<h2><%= @userpage.username %> </h2>
+<hr>
+  <h4>This Account is Private</h4> 
+  <p>Follow this account to see their Maps</p>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+   
+    <form action="/insert_follow_request" method="post">
+
+      <div class="form-group">
+        <input type="hidden" id="recipient_id_box" name="query_recipient_id" class="form-control" value="<%= @userpage.id %>">
+      </div>
+    
+    <button class="btn btn-block btn-outline-secondary">
+        Follow
+    </button>
+
+    </form>
+  </div>
+</div>
+

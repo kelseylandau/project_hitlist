@@ -1,4 +1,16 @@
 <div>
+<h2><%= @userpage.username %> </h2>
+</div>
+<hr>
+
+<% if @follower_yes == true %>
+  UNFOLLOW BUTTON
+<% else %>
+  FOLLOW BUTTON
+<% end %> 
+
+
+<div>
   <table class="userpage_profile_section">
     <tr>
       <th>
@@ -27,12 +39,16 @@
     </tr> 
   </table>
 </div>
+<hr>
+
+
 
 <hr>
 <div>
   <h4> <%= @userpage.username %>'s Visited Countries
   </h4>
-    </div>
+</div>
+
 <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
