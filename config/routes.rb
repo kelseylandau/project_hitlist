@@ -75,8 +75,8 @@ Rails.application.routes.draw do
   # FEED - FOLLOWING RECENT VISITS
   get("/feed", { :controller => "country_visits", :action => "feed" })
 
-  get("/discover", { :controller => "country_hit_lists", :action => "discover" })
-
+  get("/discover_hit_list", { :controller => "country_hit_lists", :action => "discover" })
+  get("/discover_visit", { :controller => "country_hit_lists", :action => "discover_2" })
   #------------------------------------------------------------------------------------------
 
   # Routes for the Follow request resource:

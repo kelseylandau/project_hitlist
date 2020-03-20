@@ -59,4 +59,20 @@ class CountryHitListsController < ApplicationController
 
     redirect_to("/country_hit_lists", { :notice => "Country hit list deleted successfully."} )
   end
+
+  def discover
+    # ---------- FEED SHOWS THE HITLIST COUNTRIES BY LEADERS (WHO THE USER IS FOLLOWING)
+    @user_visits = CountryVisit.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
+    @user_countries_visit = @user_visits.pluck(:country)
+    
+    render({ :template => "country_hit_lists/discover.html.erb" })
+  end
+
+  def discover_2
+    # ---------- FEED SHOWS THE COUNTRIES VISITED BY LEADERS (WHO THE USER IS FOLLOWING & HAS NOT VISITED)
+    @user_visits = CountryVisit.all.where({ :user_id => @current_user.id }).order({ :country => :asc })
+    @user_countries_visit = @user_visits.pluck(:country)
+
+    render({ :template => "country_hit_lists/discover_2.html.erb" })
+  end
 end

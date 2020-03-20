@@ -1,0 +1,67 @@
+<%# DISCOVER SHOWS COUNTRIES VISITED BY WHO USER IS FOLLOWING THAT USER HAS NOT VISITED %>
+<div>
+<h2> Discover Countries to Travel to</h2>
+</div>
+<br>
+
+<div>
+<h4> Countries your Friends have visited that you haven't (yet)</h4>
+</div>
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+
+        <th>
+          TEST
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Country
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+
+        <th>
+          
+        </th>
+      </tr>
+
+      <% @current_user.feed_visits.order({ :created_at => :desc }).each do |country_visit| %>
+
+      <% if @user_countries_visit.include?(country_visit.country) == true %>
+        <%else%>
+          <tr>
+
+            <td>
+              <%= User.where({ :id => country_visit.user_id}).at(0).username %>
+            </td>
+
+            <td>
+              <%= country_visit.country %>
+            </td>
+
+            <td>
+              <%= time_ago_in_words(country_visit.created_at) %> ago
+            </td>
+
+            <td>
+              <a href="/country_visits/<%= country_visit.id %>">
+                Show details
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

@@ -1,17 +1,12 @@
 <%# FEED SHOWS RECENT VISITS TAKEN BY WHO USER IS FOLLOWING %>
 <div>
-<h2><%= @current_user.username %>'s Feed</h2>
+<h2>Recently Added Visits</h2>
 </div>
-<hr>
-
+<br>
 
 <div>
-  <h4> Recently Added Visits
-  </h4>
+<h4> Countries your Friends Have Recently Added</h4>
 </div>
-
-
-
 <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
@@ -30,15 +25,11 @@
         </th>
 
         <th>
-          Edit
-        </th>
-
-        <th>
           
         </th>
       </tr>
 
-      <% @current_user.feed_visits.order({ :created_at => :asc }).each do |country_visit| %>
+      <% @current_user.feed_visits.order({ :created_at => :desc }).each do |country_visit| %>
       <tr>
 
         <td>
