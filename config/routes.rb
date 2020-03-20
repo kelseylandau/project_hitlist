@@ -70,7 +70,14 @@ Rails.application.routes.draw do
   # DELETE
   get("/delete_country_hit_list/:path_id", { :controller => "country_hit_lists", :action => "destroy" })
 
-  #------------------------------
+  #------------------------------  ACTIVITY FEED ----------------------------------------
+  
+  # FEED - FOLLOWING RECENT VISITS
+  get("/feed", { :controller => "country_visits", :action => "feed" })
+
+  get("/discover", { :controller => "country_hit_lists", :action => "discover" })
+
+  #------------------------------------------------------------------------------------------
 
   # Routes for the Follow request resource:
 

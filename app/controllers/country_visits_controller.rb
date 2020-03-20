@@ -54,4 +54,11 @@ class CountryVisitsController < ApplicationController
 
     redirect_to("/", { :notice => "Country visit deleted successfully."} )
   end
+
+
+  def feed
+    # ---------- FEED SHOWS THE RECENT VISITS ADDED BY LEADERS (WHO THE USER IS FOLLOWING)
+    
+    render({ :template => "country_visits/feed.html.erb" })
+  end
 end

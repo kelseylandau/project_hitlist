@@ -1,0 +1,68 @@
+<%# FEED SHOWS RECENT VISITS TAKEN BY WHO USER IS FOLLOWING %>
+<div>
+<h2><%= @current_user.username %>'s Feed</h2>
+</div>
+<hr>
+
+
+<div>
+  <h4> Recently Added Visits
+  </h4>
+</div>
+
+
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Country
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Edit
+        </th>
+
+        <th>
+          
+        </th>
+      </tr>
+
+      <% @current_user.feed_visits.order({ :created_at => :asc }).each do |country_visit| %>
+      <tr>
+
+        <td>
+          <%= User.where({ :id => country_visit.user_id}).at(0).username %>
+        </td>
+
+        <td>
+          <%= country_visit.country %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(country_visit.created_at) %> ago
+        </td>
+
+        <td>
+          <a href="/country_visits/<%= country_visit.id %>">
+            Show details
+          </a>
+        </td>
+
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

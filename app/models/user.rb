@@ -16,8 +16,8 @@ class User < ApplicationRecord
   validates :email, :presence => true
   has_secure_password
 
-  has_many :country_hit_lists, :dependent => :destroy
-  has_many :country_visits, :dependent => :destroy
+  has_many :country_hit_lists, :class_name => "CountryHitList", :foreign_key => "user_id", :dependent => :destroy
+  has_many :country_visits, :class_name => "CountryVisit", :foreign_key => "user_id", :dependent => :destroy
 
   has_many :received_follow_requests, :class_name => "FollowRequest", :foreign_key => "recipient_id", :dependent => :destroy
     has_many(:accepted_recieved_follow_requests, -> { where({ :status => "accepted" }) }, { :class_name => "FollowRequest", :foreign_key => "recipient_id" })
@@ -30,4 +30,7 @@ class User < ApplicationRecord
   has_many :leaders, :through => :accepted_sent_follow_requests, :source => :recipient
   has_many :followers, :through => :accepted_recieved_follow_requests, :source => :sender
     has_many :pending_followers, :through => :pending_recieved_follow_requests, :source => :sender
+
+  has_many :feed_visits, :through => :leaders, :source => :country_visits
+  has_many :discover_hit_list, :through => :leaders, :source => :country_hit_lists
 end
