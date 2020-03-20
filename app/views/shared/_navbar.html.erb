@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
   <div class="container">
     <a class="navbar-brand" href="/">
-      FinalProject
+      Final Project
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-nav-links" aria-controls="collapsible-nav-links" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,21 +12,47 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Resources
+            Travel Lists
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a href="/country_hit_lists" class="dropdown-item">
-              Country Hit Lists
+            <a href="/country_visits/<%#{@current_user.user_id}%>" class="dropdown-item">
+              Visited Countries
             </a>
-            <a href="/follow_requests" class="dropdown-item">
-              Follow Requests
-            </a>
-            <a href="/country_visits" class="dropdown-item">
-              Country Visits
+            <a href="/country_hit_lists/<%#{@current_user.user_id}%>" class="dropdown-item">
+              Hit List
             </a>
           </div>
         </li>
       </ul>
     </div> <!-- .navbar-collapse -->
+
+    <ul class="navbar-nav">
+        <% if @current_user.blank? %>
+          <li class="nav-item">
+            <a href="/user_sign_in" class="nav-link">
+              Sign in
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/user_sign_up" class="nav-link">
+              Sign up
+            </a>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a href="/edit_user" class="nav-link">
+              Edit profile
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/user_sign_out" data-method="delete" class="nav-link">
+              Sign out
+            </a>
+          </li>
+        <% end %>
+      </ul>
+
   </div> <!-- .container -->
 </nav>
