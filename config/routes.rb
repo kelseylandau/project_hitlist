@@ -2,6 +2,25 @@ Rails.application.routes.draw do
 
 
 
+  # Routes for the Country hit list resource:
+
+  # CREATE
+  post("/insert_country_hit_list", { :controller => "country_hit_lists", :action => "create" })
+          
+  # READ
+  get("/country_hit_lists", { :controller => "country_hit_lists", :action => "index" })
+  
+  get("/country_hit_lists/:path_id", { :controller => "country_hit_lists", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_country_hit_list/:path_id", { :controller => "country_hit_lists", :action => "update" })
+  
+  # DELETE
+  get("/delete_country_hit_list/:path_id", { :controller => "country_hit_lists", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the Follow request resource:
 
   # CREATE
