@@ -61,4 +61,11 @@ class CountryVisitsController < ApplicationController
     
     render({ :template => "country_visits/feed.html.erb" })
   end
+
+  def leaderboard
+    # ---------- Ranking of country  count    
+
+    render({ :template => "country_visits/user_ranking.html.erb" })
+  end
+
 end

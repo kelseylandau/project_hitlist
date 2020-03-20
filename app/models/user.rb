@@ -33,4 +33,8 @@ class User < ApplicationRecord
 
   has_many :feed_visits, :through => :leaders, :source => :country_visits
   has_many :discover_hit_list, :through => :leaders, :source => :country_hit_lists
+
+  def country_count
+    return self.country_visits.count
+  end
 end

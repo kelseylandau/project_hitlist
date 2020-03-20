@@ -1,0 +1,42 @@
+<%# DISCOVER SHOWS COUNTRIES VISITED BY WHO USER IS FOLLOWING THAT USER HAS NOT VISITED %>
+<div>
+<h2> Jetsetter Standings</h2>
+</div>
+<br>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Country Count
+        </th>
+
+        <th>
+          Countries
+        </th>
+      </tr>
+      
+      <% @current_user.leaders.each do |user| %>
+          <tr>
+            <td>
+              <%= user.username %>
+            </td>
+
+            <td>
+              <%= CountryVisit.all.where({ :user_id => user.id }).count %>
+            </td>
+
+            <td>
+              <%= CountryVisit.all.where({ :user_id => user.id }).order({ :country => :asc }).pluck(:country).join(', ') %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
