@@ -18,5 +18,10 @@
     margin-right:auto;
     background-color: #F0FFFF;
     width: 100%;
+    padding: 6px 8px 6px 8px;
+    table-layout: fixed ;
   }
 
+  .homepage_profile_section, th {
+    text-align: center;
+  }
